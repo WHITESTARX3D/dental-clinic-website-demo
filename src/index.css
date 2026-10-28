@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+/* ============================================================
+   LUMIS DENTAL — DESIGN SYSTEM (Tailwind v4 theme tokens)
+   Palette: Deep teal / ocean blues + vibrant coral CTA accents
+   Surfaces: ultra-light ice blue backgrounds, white cards
+   ============================================================ */
+@theme {
+  /* Brand palette */
+  --color-brand: #00a896; /* primary teal */
+  --color-brand-deep: #028090; /* deep teal */
+  --color-navy: #05668d; /* ocean blue */
+  --color-ink: #073b4c; /* darkest text tone */
+  --color-coral: #ff6b35; /* CTA accent */
+  --color-amber: #f77f00; /* warm accent */
+  --color-ice: #f4f9f9; /* page background */
+  --color-mist: #e8f6f6; /* soft cyan section bg */
+
+  /* Typography — fresh pairing: Outfit display + Inter body */
+  --font-display: "Outfit", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  /* Animations exposed as `--tw` animate utilities */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.2s cubic-bezier(0.25, 0.6, 0.3, 1) infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  @apply bg-ice font-sans text-ink antialiased;
+  overflow-x: hidden; /* hard guard: zero horizontal scroll */
+}
+::selection {
+  background: rgba(0, 168, 150, 0.25);
+}
+/* Slim, brand-tinted scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #e8f6f6;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#00a896, #028090);
+  border-radius: 8px;
+}
+
+/* ---------- Claymorphism surfaces ---------- */
+/* Soft tactile card: top inner highlight + inset base tint + layered drop shadow */
+.clay {
+  border-radius: 1.75rem;
+  background: #ffffff;
+  box-shadow:
+    inset 0 2px 0 0 rgba(255, 255, 255, 0.95),
+    inset 0 -10px 18px -10px rgba(2, 128, 144, 0.12),
+    0 1px 2px rgba(7, 59, 76, 0.05),
+    0 26px 52px -26px rgba(7, 59, 76, 0.22);
+}
+/* Deep teal clay panel (used for stats / CTA bands) */
+.clay-teal {
+  border-radius: 1.75rem;
+  background: linear-gradient(145deg, #00b4a0 0%, #028090 60%, #05668d 100%);
+  box-shadow:
+    inset 0 2px 0 0 rgba(255, 255, 255, 0.35),
+    inset 0 -12px 20px -12px rgba(2, 40, 60, 0.55),
+    0 30px 60px -28px rgba(4, 70, 96, 0.55);
+}
+.clay-coral {
+  border-radius: 1.75rem;
+  background: linear-gradient(145deg, #ff8a5c 0%, #ff6b35 55%, #f77f00 100%);
+  box-shadow:
+    inset 0 2px 0 0 rgba(255, 255, 255, 0.45),
+    inset 0 -12px 20px -12px rgba(120, 40, 0, 0.4),
+    0 26px 56px -24px rgba(255, 107, 53, 0.55);
+}
+
+/* ---------- Glassmorphism surfaces ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 18px 40px -18px rgba(7, 59, 76, 0.25);
+}
+.glass-deep {
+  background: rgba(5, 54, 70, 0.5);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 48px -20px rgba(3, 40, 55, 0.6);
+}
+
+/* ---------- Decorative helpers ---------- */
+.text-gradient {
+  background: linear-gradient(92deg, #00a896 10%, #028090 55%, #05668d 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-coral {
+  background: linear-gradient(92deg, #ff6b35, #f77f00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Light gradient for headings sitting on dark/teal panels */
+.text-gradient-light {
+  background: linear-gradient(92deg, #ffffff 20%, #b9efe8 70%, #8fe3da);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Halftone dot texture for section backgrounds */
+.dot-grid {
+  background-image: radial-gradient(rgba(2, 128, 144, 0.14) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+/* Shimmering skeleton/highlight sweep */
+.shimmer {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0) 33%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 66%
+  );
+  background-size: 200% 100%;
+}
+
+/* Underline link effect */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.link-underline:hover {
+  background-size: 100% 2px;
+}
+
+/* Swiper theme overrides (dots in brand colors) */
+.swiper-pagination-bullet {
+  background: rgba(2, 128, 144, 0.3);
+  opacity: 1;
+  width: 9px;
+  height: 9px;
+  transition: all 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+  background: #00a896;
+  width: 26px;
+  border-radius: 6px;
+}
+
+/* ---------- Reduced motion: pull back decorative animation ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float,
+  .animate-float-slow,
+  .animate-marquee,
+  .animate-spin-slow,
+  .animate-pulse-ring,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
